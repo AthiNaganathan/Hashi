@@ -3,7 +3,6 @@
 *.mex*
 *.p
 *.log
-*.mat
 
 # Data and results
 data/
