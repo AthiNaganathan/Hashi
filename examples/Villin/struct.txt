@@ -1,0 +1,52 @@
+REM  -------------------- Secondary structure summary -------------------  ~~~~
+REM                                                                        ~~~~
+CHN  /home/proj/stride/tmp/tmp5cpClPpdb A                                  ~~~~
+REM                                                                        ~~~~
+REM                .         .         .                                   ~~~~
+SEQ  1    LSDEDFKAVFGMTRSAFANLPLWKQQHLKKEKGLF                  35          ~~~~
+STR         HHHHHHHH   HHHHHH  HHHHHHHHHHH                                 ~~~~
+REM                                                                        ~~~~
+REM                                                                        ~~~~
+REM                                                                        ~~~~
+LOC  AlphaHelix   ASP    44 A      PHE     51 A                            ~~~~
+LOC  AlphaHelix   ARG    55 A      ASN     60 A                            ~~~~
+LOC  AlphaHelix   LEU    63 A      LYS     73 A                            ~~~~
+REM                                                                        ~~~~
+REM  --------------- Detailed secondary structure assignment-------------  ~~~~
+REM                                                                        ~~~~
+REM  |---Residue---|    |--Structure--|   |-Phi-|   |-Psi-|  |-Area-|      ~~~~
+ASG  LEU A   42    1    C          Coil    360.00    159.39     106.9      ~~~~
+ASG  SER A   43    2    C          Coil    -64.88    163.04      59.9      ~~~~
+ASG  ASP A   44    3    H    AlphaHelix    -66.50    -35.15     110.2      ~~~~
+ASG  GLU A   45    4    H    AlphaHelix    -64.46    -46.64     140.9      ~~~~
+ASG  ASP A   46    5    H    AlphaHelix    -62.02    -40.42      86.8      ~~~~
+ASG  PHE A   47    6    H    AlphaHelix    -58.12    -47.57       5.2      ~~~~
+ASG  LYS A   48    7    H    AlphaHelix    -61.32    -38.24     111.8      ~~~~
+ASG  ALA A   49    8    H    AlphaHelix    -62.83    -47.72      81.3      ~~~~
+ASG  VAL A   50    9    H    AlphaHelix    -67.75    -45.54      55.0      ~~~~
+ASG  PHE A   51   10    H    AlphaHelix   -101.73     -6.51      25.0      ~~~~
+ASG  GLY A   52   11    C          Coil     74.10     18.16      64.1      ~~~~
+ASG  MET A   53   12    C          Coil   -164.78    165.12      61.9      ~~~~
+ASG  THR A   54   13    C          Coil    -71.57    164.13      75.0      ~~~~
+ASG  ARG A   55   14    H    AlphaHelix    -54.29    -42.93      95.4      ~~~~
+ASG  SER A   56   15    H    AlphaHelix    -59.83    -44.35      88.7      ~~~~
+ASG  ALA A   57   16    H    AlphaHelix    -61.72    -47.68      37.2      ~~~~
+ASG  PHE A   58   17    H    AlphaHelix    -59.33    -34.56       5.2      ~~~~
+ASG  ALA A   59   18    H    AlphaHelix    -66.39    -14.92      59.0      ~~~~
+ASG  ASN A   60   19    H    AlphaHelix    -83.39    -11.01     141.2      ~~~~
+ASG  LEU A   61   20    C          Coil    -74.92    159.29      48.0      ~~~~
+ASG  PRO A   62   21    C          Coil    -53.77    146.26      63.2      ~~~~
+ASG  LEU A   63   22    H    AlphaHelix    -59.79    -42.37     138.2      ~~~~
+ASG  TRP A   64   23    H    AlphaHelix    -62.71    -32.50     165.1      ~~~~
+ASG  LYS A   65   24    H    AlphaHelix    -73.62    -39.81      81.2      ~~~~
+ASG  GLN A   66   25    H    AlphaHelix    -57.44    -44.93      37.9      ~~~~
+ASG  GLN A   67   26    H    AlphaHelix    -60.64    -48.55     111.4      ~~~~
+ASG  HIS A   68   27    H    AlphaHelix    -57.58    -48.37      84.1      ~~~~
+ASG  LEU A   69   28    H    AlphaHelix    -65.66    -38.63      46.0      ~~~~
+ASG  LYS A   70   29    H    AlphaHelix    -65.11    -47.00      45.9      ~~~~
+ASG  LYS A   71   30    H    AlphaHelix    -62.78    -39.04     126.1      ~~~~
+ASG  GLU A   72   31    H    AlphaHelix    -59.41    -28.40     139.1      ~~~~
+ASG  LYS A   73   32    H    AlphaHelix    -96.22      7.43     122.9      ~~~~
+ASG  GLY A   74   33    C          Coil     73.25     21.47      64.9      ~~~~
+ASG  LEU A   75   34    C          Coil   -115.87    167.29      51.1      ~~~~
+ASG  PHE A   76   35    C          Coil   -115.87    360.00     229.2      ~~~~
