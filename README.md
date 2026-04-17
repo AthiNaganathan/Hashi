@@ -24,7 +24,6 @@ Following version of softwares are required -
 ### Overview
 
 The overall workflow is split into two steps - (1) Running bWSME calculations to generate 1D free energy profiles and ensembles, and (2) passing this information to RANCH to generate 3D structural ensembles.
-The overall workflow is split into two steps - (1) Running bWSME calculations to generate 1D free energy profiles and ensembles, and (2) passing this information to RANCH to generate 3D structural ensembles.
 
 > On cloning the repo, with `\scripts\` as the working directory, run `\scripts\init.m` to generate the empty directories `\data\` and `\results\` which are required for successful execution of the code.
 
@@ -37,10 +36,10 @@ A general run requires three input files. For a protein named `pname`, these are
 
 With these files in `\data\`, `main_WSME.m` is called. The outputs of `main_WSME.m` is stored in `\data\WSME_outputs\`. Two specific output files, `pname_pepval.mat` and `pname_BlockDet.mat` are automatically copied into `\data\`, as these two files (along with `pname.pdb` and `pname.cif`) are the four input files required for `main_RANCH.m`. The user is recommended to properly read and execute the two examples given in the next section, to understand the flow of the program, before running it on their data.
 
-> **NOTE :** If you already have `pname_pepval.mat` and `pname_BlockDet.mat` (say, from a previous run), you can run `main_RANCH.m` directly, as shown in **Example 2 : Pertactin**.
+> **NOTE :** If you already have `pname_pepval.mat` and `pname_BlockDet.mat` (say, from a previous run), you can run `main_RANCH.m` directly*.
 
 Following this, the input parameters can be modified in `main_RANCH.m` (explained in examples), and the script can be executed. The outputs can be found in `\results\`. 
-- `\results\microstates\` contains all microstate information listed sequentially (as an intermediate step in executing RANCH).
+- `\results\microstates\` contains all ranked microstate information listed sequentially (as an intermediate step in executing RANCH).
 - `\results\pools\` is the intended final output folder, with conformers sorted into user-defined pools.
 
 > **A Note on terminologies used -**
@@ -70,38 +69,47 @@ This can be used as a reference for further analysis, if necessary.
 
 The following example uses data from `\examples\Villin\` to demonstrate the typical workflow. Villin is a short protein (35 resideus), and the following example considers only one pool. **Example 2: Pertactin** considers a larger protein with multiple pools.
 
-### Setting Up -
+### 1.1 Setting Up -
 
 If not already done, with `\scripts\` as the working directory, run `\scripts\init.m` to generate the empty directories `\data\` and `\results\`. 
 
 Copy the three files (`Villin.pdb`, `Villin.cif` and `struct.txt`) from `\examples\Villin\` into `\data\`. The directory should now have these three files along with the empty directory `\data\WSME_outputs\`.
 
-### Running main_WSME.m -
+### 1.2 Running main_WSME.m -
 
 Open `\scripts\main_WSME.m` and edit the following parameters -
-1. Set `pname` to the protein name (line 9). Here, set
+1. Set `pname` to the protein name (line 9), `BlockSize` to the size of blocks to be considered in the bWSME model (line 10), and `is_long_protein` to zero (line 11). 
+2. Set the input parameters for `cmapCalcElecBlock` and `FesCalc_Block` (their documentation can be found in the function source codes in `\scripts\pipelines`) in the parameters between lines 12 and 19. 
+
+For the ease of the user, these values default to the current Villin example, given as -
 ```matlab
-% Set protein name
-pname = 'Villin';
+% Villin
+pname  = 'Villin';
+BlockSize = 1;
+is_long_protein = 0;
+struct_file = 'struct.txt';
+pH = 7;
+srcutoff = 5.0;
+ene = -98/1000;
+DS = -14.5/1000;
+DCp = -0.3579/1000;
+T = 310;
+IS = 0.1;
 ```
-2. Set the input parameters for `cmapCalcElecBlock` and `FesCalc_Block` (their documentation can be found in the function source codes in `\scripts\pipelines`) (lines 33 and 35). Here, set
-```matlab
-% Inputs = protein name, stride output file, pH, srcutoff, BlockSize
-cmapCalcElecBlock(pname, 'struct.txt', 7, 5.0, 1)
-% Inputs = protein name, stride output file, ene, DS, DCp, T, IS
-FesCalc_Block(pname, 'struct.txt', -98/1000, -14.5/1000, -0.3579/1000, 310, 0.1)
-```
+The parameter `is_long_protein` determines whether `FesCalc_Block()` (for short proteins, such as Villin) or `FesCalc_Block_gen()` (for longer proteins, such as Pertactin in Example 2) is called for determining the free energy profile. If `is_long_protein` is set to 1, definition of additional parameters `disr` and `ppos` is required, as shown in the next example.
+
+>  **NOTE :** It is empirically observed that for proteins longer than ~150 residues, setting `is_long_protein` to 1 leads to significant performance boost. Exact performance depends on the value of other input parameters as well.
 
 3. Then, execute `main_WSME.m`. When prompted, type `y` at the command line and hit `Enter`.
 
-You will now see output files of the same in `\data\WSME_outputs\`, alongside two new files `Villin_pepval.mat` and `Villin_BlockDet.mat` in `\data\`.
+You will now see output files of the same in `\data\WSME_outputs\`, alongside two new files `Villin_pepval.mat` and `Villin_BlockDet.mat` in `\data\`. These files are required for running `main_RANCH.m`.
 
 Calling function `disp_blocks(pname)` from the MATLAB command line displays the 1D Macrostate landscape, which can serve as a guide for assigning pools of interest. For the current Villin example, the output from calling function `disp_blocks('Villin')` looks as follows -
 
 ![Villin - Visualization of 1D landscape](/Villin_fig1.png)
 
 
-### Running main_RANCH.m -
+### 1.3 Running main_RANCH.m -
 
 Open `\scripts\main_RANCH.m` and edit the following parameters -
 1. Set `pname` to the protein name (line 10).
@@ -130,17 +138,38 @@ The naming of the output conformers follows the pattern `<no of structured block
 
 ## Example 2: Pertactin
 
-### Setting Up -
+### 2.1 Setting Up -
 
 If not already done, with `\scripts\` as the working directory, run `\scripts\init.m` to generate the empty directories `\data\` and `\results\`.
 
-The directory should now have these three files along with the empty directory `\data\WSME_outputs\`.
+Copy the three files (`Pertactin.pdb`, `Pertactin.cif`, and `struct.txt`) from `\examples\Pertactin\` into `\data\`. The directory should now have these three files along with the empty directory `\data\WSME_outputs\`.
 
->**NOTE :** In this example, we omit the generation of the `Pertactin_pepval.mat` and `Pertactin_BlockDet.dat` files, choosing instead to provide these outputs directly in the `\examples\Pertactin` directory. This is because Pertactin is 538 residues long, and it requires ~400GB of runtime memory to compute the same. The `struct.txt` file is provided, however, should the user have access to the computing power required to generate the same.
+### 2.2 Running main_WSME.m -
 
-Copy the four files (`Pertactin.pdb`, `Pertactin.cif`, `Pertactin_pepval.mat` and `Pertactin_BlockDet.dat`) from `\examples\Pertactin\` into `\data\`.
+Open `\scripts\main_WSME.m` and edit the following parameters -
+1. Set protein name and edit input parameters as described in the previous example. For a long protein such as Pertactin, it is required to set `is_long_protein` to 1.
 
-### Running main_RANCH.m -
+For the ease of the user, the values for this run are available commented from the lines **(22-39)**. You can comment the values of the previous example (lines **12-19**), and uncomment the lines for this example. Once uncommented, they appear as follows -
+```matlab
+% Pertactin
+pname = 'Pertactin';
+BlockSize = 5;
+is_long_protein = 1;
+struct_file = 'struct.txt';
+pH = 7;
+srcutoff = 5.0;
+ene = -79/1000;
+DS = -14.5/1000;
+DCp = -0.36/1000;
+T = 298;
+IS = 0.05; 
+```
+
+3. Then, execute `main_WSME.m`. When prompted, type `y` at the command line and hit `Enter`.
+
+You will now see output files of the same in `\data\WSME_outputs\`, alongside two new files `Pertactin_pepval.mat` and `Pertactin_BlockDet.mat` in `\data\`. The visaulization of the 1D landscape can be done by calling `disp_blocks('Pertactin')` as in the previous example.
+
+### 2.3 Running main_RANCH.m -
 
 Open `\scripts\main_RANCH.m` and edit the input parameters. The meanings of the various input parameters remain identical to the previous example.
 

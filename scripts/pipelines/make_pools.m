@@ -54,5 +54,5 @@ function make_pools(pools, no_of_microstates)
             delete(fullfile(pool_path, '*.mat'));
         end
     end
-    disp("Done")
+    disp("make_pools done")
 end

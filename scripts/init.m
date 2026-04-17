@@ -49,4 +49,5 @@ addpath(genpath(fullfile(thisDir, '..', 'data')))
 addpath(genpath(fullfile(thisDir, '..', 'results')))
 disp("Set up path")
 
+fclose('all');
 disp("Initialization done")

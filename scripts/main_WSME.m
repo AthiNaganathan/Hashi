@@ -5,11 +5,32 @@ init
 
 % Set protein name
 
-% Villin
-pname  = 'Villin';
+% % Villin
+% pname  = 'Villin';
+% BlockSize = 1;
+% is_long_protein = 0;
+% struct_file = 'struct.txt';
+% pH = 7;
+% srcutoff = 5.0;
+% ene = -98/1000;
+% DS = -14.5/1000;
+% DCp = -0.3579/1000;
+% T = 310;
+% IS = 0.1;
 
-% % Pertactin
-% pname = 'Pertactin';
+
+% Pertactin
+pname = 'Pertactin';
+BlockSize = 5;
+is_long_protein = 1;
+struct_file = 'struct.txt';
+pH = 7;
+srcutoff = 5.0;
+ene = -79/1000;
+DS = -14.5/1000;
+DCp = -0.36/1000;
+T = 298;
+IS = 0.05;
 
 %%% Some verifications
 
@@ -29,10 +50,17 @@ mkdir(fullfile(pwd, "..", "data", "WSME_outputs"))
 %%% Refer to individual function scripts within /scripts/pipelines/ for
 %%% complete documentation of input parameters
 
-% Inputs = protein name, stride output file, pH, srcutoff, BlockSize
-cmapCalcElecBlock(pname, 'struct.txt', 7, 5.0, 1)
-% Inputs = protein name, stride output file, ene, DS, DCp, T, IS
-FesCalc_Block(pname, 'struct.txt', -98/1000, -14.5/1000, -0.3579/1000, 310, 0.1)
+cmapCalcElecBlock(pname, struct_file, pH, srcutoff, BlockSize)
+tic
+if ~is_long_protein
+    disp("Not a long protein! Running FesCalc_Block...")
+    FesCalc_Block(pname, struct_file, ene, DS, DCp, T, IS)
+else
+    disp("Long protein! Running FesCalc_Block_gen...")
+    FesCalc_Block_gen(pname, struct_file, ene, DS, DCp, T, IS)
+end
+toc
+
 
 % Move files used specifically for RANCH
 copyfile(fullfile(pwd, '..', 'data', 'WSME_outputs', [pname '_pepval.mat']), fullfile(pwd, '..', 'data', [pname '_pepval.mat']))

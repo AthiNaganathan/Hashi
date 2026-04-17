@@ -64,5 +64,5 @@ function generate_ranch_files(pname, no_of_microstates, pools)
         save(fullfile(path, 'microstate_info.mat'), "mis")
     end
     
-    disp("Main 1 Done")
+    disp("generate_ranch_files done")
 end

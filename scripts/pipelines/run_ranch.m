@@ -51,5 +51,5 @@ function run_ranch(pname, reps)
         end
     end
     
-    disp("Main 2 Done")
+    disp("run_ranch done")
 end
