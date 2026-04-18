@@ -6,17 +6,17 @@ init
 
 %%% Setup Input Parameters
 
-% % Example 1 : Villin
-% pname = 'Villin'; % Protein name
-% macrostate_pools = [25 34]; % Split 1D landscape into pools wherein to visualize ensemble
-% no_of_microstates = 20; % No. of microstates considered per pool of macrostates
-% no_of_conformations = 5; % No. of conformations to be generated per microstate
-
-% Example 2 : Pertactin
-pname = 'Pertactin'; % Protein name
-macrostate_pools = [68 76; 107 111; 128 137]; % Split 1D landscape into pools wherein to visualize ensemble
-no_of_microstates = 5; % No. of microstates considered per pool of macrostates
+% Example 1 : Villin
+pname = 'Villin'; % Protein name
+macrostate_pools = [25 34]; % Split 1D landscape into pools wherein to visualize ensemble
+no_of_microstates = 20; % No. of microstates considered per pool of macrostates
 no_of_conformations = 5; % No. of conformations to be generated per microstate
+
+% % Example 2 : Pertactin
+% pname = 'Pertactin'; % Protein name
+% macrostate_pools = [68 76; 107 111; 128 137]; % Split 1D landscape into pools wherein to visualize ensemble
+% no_of_microstates = 5; % No. of microstates considered per pool of macrostates
+% no_of_conformations = 5; % No. of conformations to be generated per microstate
 
 
 % Run disp_blocks(pname, macrostate_pools) in console to visualize assigned splits

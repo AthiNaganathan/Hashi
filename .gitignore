@@ -3,6 +3,7 @@
 *.mex*
 *.p
 *.log
+*.pse
 
 # Data and results
 data/

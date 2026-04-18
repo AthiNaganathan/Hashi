@@ -6,6 +6,8 @@ function disp_blocks(pname, pools)
         pools double = 0    % User-defined pools (optional)
     end
 
+    T = input("Enter Temperature (in K) : ");
+
     filename = pname + "_pepval.mat";
     raw_data = load(filename);
     raw_data = raw_data.pepval;
@@ -20,25 +22,29 @@ function disp_blocks(pname, pools)
     clf('reset')
     hold on
 
-    % Plot free energy as a function of number of structured blocks
+    % Right axis (area)
+    yyaxis right
+    area(x, y,'LineStyle',':', 'EdgeColor','b', 'FaceColor', [0.9 0.9 0.9], 'FaceAlpha', 0.5);
+    ylabel("Probability")
+    set(gca, 'YColor', 'b');
+    
+    % Left axis (line)
     yyaxis left
-    plot(x, -8.314.*298.*log(y),'LineWidth',3)
-    ylabel("Delta G (kJ/mol)")
-    yticklabels({})
+    y_data = -8.314.*T.*log(y)/1000;
+    plot(x, y_data,'k');
+    ylabel("FE (kJ mol^{-1})")
+    yticks(0:10:max(y_data))
+    ylim([min(y_data) max(y_data)+0.1*range(y_data)])
+    set(gca, 'YColor', 'k');
+
+    xlabel("No. of Structured Blocks")
+    xticks(0:10:max(x))
 
     % If user-defined pools are provided, highlight the same
     if ~isscalar(pools)
         for i = 1:size(pools, 1)
             y_lim = ylim;
-            rectangle('Position', [pools(i, 1) 0 pools(i, 2)-pools(i, 1) y_lim(2)], 'FaceColor', [0.9 0.9 0.9], 'EdgeColor', 'none', 'FaceAlpha', 0.5);
+            rectangle('Position', [pools(i, 1) 0 pools(i, 2)-pools(i, 1) y_lim(2)], 'FaceColor', [1 0.5 0], 'EdgeColor', 'none', 'FaceAlpha', 0.1);
         end
     end
-
-    % Plot probability of different macrostates
-    yyaxis right
-    plot(x, y, '--','LineWidth',3)
-    ylabel("Probability")
-    yticklabels({})
-
-    xlabel("No. of structured blocks")
 end

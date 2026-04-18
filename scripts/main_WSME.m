@@ -5,32 +5,32 @@ init
 
 % Set protein name
 
-% % Villin
-% pname  = 'Villin';
-% BlockSize = 1;
-% is_long_protein = 0;
-% struct_file = 'struct.txt';
-% pH = 7;
-% srcutoff = 5.0;
-% ene = -98/1000;
-% DS = -14.5/1000;
-% DCp = -0.3579/1000;
-% T = 310;
-% IS = 0.1;
-
-
-% Pertactin
-pname = 'Pertactin';
-BlockSize = 5;
-is_long_protein = 1;
+% Villin
+pname  = 'Villin';
+BlockSize = 1;
+is_long_protein = 0;
 struct_file = 'struct.txt';
 pH = 7;
 srcutoff = 5.0;
-ene = -79/1000;
+ene = -87.5/1000;
 DS = -14.5/1000;
 DCp = -0.36/1000;
-T = 298;
-IS = 0.05;
+T = 310;
+IS = 0.15;
+
+
+% % Pertactin
+% pname = 'Pertactin';
+% BlockSize = 5;
+% is_long_protein = 1;
+% struct_file = 'struct.txt';
+% pH = 7;
+% srcutoff = 5.0;
+% ene = -79/1000;
+% DS = -14.5/1000;
+% DCp = -0.36/1000;
+% T = 298;
+% IS = 0.05;
 
 %%% Some verifications
 
