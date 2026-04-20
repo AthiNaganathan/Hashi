@@ -97,7 +97,7 @@ pH = 7;
 srcutoff = 5.0;
 ene = -87.5/1000;
 DS = -14.5/1000;
-DCp = -0.3579/1000;
+DCp = -0.36/1000;
 T = 310;
 IS = 0.15;
 ```
@@ -148,8 +148,6 @@ The naming of the output conformers follows the pattern `<no of structured block
 The outputs in `\results\pools\pool_1\` for the above example are visualized below. These are possible conformations of the top 20 most probable microstates with 25-34 structured residues.
 
 ![Villin - Outputs in pool 1](/images/Villin_fig3.png)
-
-The script for aligning+coloring structures used by the author is provided in `\scripts\` as `align_structures.py`. When called from PyMol, it loads, aligns and colours all the .cif files present in the working directory. To use it, copy it into any of the `\results\pools\pool_n\` directories, and, with the same being the working directory in PyMol,  call it from PyMol using `run align_structures.py`. The output is saved as `aligned_session.pse` in the same directory.
 
 The user is of course encouraged to utilize their own visualization pipelines. The above is just for a quick visual.
 
@@ -228,7 +226,7 @@ The outputs in `\results\pools\pool_3\` for the above example are visualized bel
 
 ![Villin - Outputs in pool 1](/images/Pertactin_fig5.png)
 
-The script for aligning+coloring structures used by the author is provided in `\scripts\` as `align_structures.py`. When called from PyMol, it loads, aligns and colours all the .cif files present in the working directory. To use it, copy it into any of the `\results\pools\pool_n\` directories, and, with the same being the working directory in PyMol,  call it from PyMol using `run align_structures.py`. The output is saved as `aligned_session.pse` in the same directory.
+The script for aligning+coloring structures used by the author is provided in `\scripts\` as `align_structures.py`. The residues to be aligned can be modified in lines 19 and 20 (default value is set to align the C terminus residues 366-536 for the current Pertactin example). When called from PyMol, it loads, aligns and colours all the .cif files present in the working directory. To use it, copy it into any of the `\results\pools\pool_n\` directories, and, with the same being the working directory in PyMol,  call it from PyMol using `run align_structures.py` from the PyMol command line. The output is saved as `aligned_session.pse` in the same directory.
 
 The user is of course encouraged to utilize their own visualization pipelines. The above is just for a quick visual.
 
