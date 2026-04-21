@@ -214,17 +214,17 @@ The naming of the output conformers follows the pattern `<no of structured block
 
 > **NOTE -** Different runs will generate different conformations due to random seed initialization by RANCH. 
 
-The outputs in `\results\pools\pool_1\` for the above example are visualized below. These are possible conformations of the top 5 most probable microstates with 68-76 structured residues.
+The outputs in `\results\pools\pool_3\` for the above example are visualized below. These are possible conformations of the top 5 most probable microstates with 128-137 structured residues, corresponding to the folded ensemble.
 
-![Villin - Outputs in pool 1](/images/Pertactin_fig3.png)
+![Villin - Outputs in pool 1](/images/Pertactin_fig5.png)
 
-The outputs in `\results\pools\pool_2\` for the above example are visualized below. These are possible conformations of the top 5 most probable microstates with 107-111 structured residues.
+The outputs in `\results\pools\pool_2\` for the above example are visualized below. These are possible conformations of the top 5 most probable microstates with 107-111 structured residues, corresponding to the intermediate-like ensemble.
 
 ![Villin - Outputs in pool 1](/images/Pertactin_fig4.png)
 
-The outputs in `\results\pools\pool_3\` for the above example are visualized below. These are possible conformations of the top 5 most probable microstates with 128-137 structured residues.
+The outputs in `\results\pools\pool_1\` for the above example are visualized below. These are possible conformations of the top 5 most probable microstates with 68-76 structured residues, corresponding to the intermediate ensemble.
 
-![Villin - Outputs in pool 1](/images/Pertactin_fig5.png)
+![Villin - Outputs in pool 1](/images/Pertactin_fig3.png)
 
 The script for aligning+coloring structures used by the author is provided in `\scripts\` as `align_structures.py`. The residues to be aligned can be modified in lines 19 and 20 (default value is set to align the C terminus residues 366-536 for the current Pertactin example). When called from PyMol, it loads, aligns and colours all the .cif files present in the working directory. To use it, copy it into any of the `\results\pools\pool_n\` directories, and, with the same being the working directory in PyMol,  call it from PyMol using `run align_structures.py` from the PyMol command line. The output is saved as `aligned_session.pse` in the same directory.
 
