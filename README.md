@@ -232,4 +232,20 @@ The user is of course encouraged to utilize their own visualization pipelines. T
 
 ## References
 
-Refer ____ for complete information and references.
+If using Hashi, please cite the following two articles:
+
+1. Soundhararajan Gopi, Akashnathan Aranganathan & Athi N. Naganathan (2019). Thermodynamics and Folding Landscapes of Large Proteins from a Statistical Mechanical Model. Curr. Res. Struct. Biol., 1, 6-12.
+
+2. Athi N. Naganathan, Rahul Dani, Soundhararajan Gopi, Akashnathan Aranganathan & Abhishek Narayan (2021). Folding Intermediates, Heterogeneous Native Ensembles and Protein Function. J. Mol. Biol., 433, 167325.
+
+Additional reading and references:
+
+1. Sathvik Anantakrishnan & Athi N. Naganathan (2023). Thermodynamic Architecture and Conformational Plasticity of GPCRs. Nat. Commun., 14, 128.
+
+2. Athi N. Naganathan & Adithi Kannan (2021). A Hierarchy of Coupling Free Energies Underlie the Thermodynamic and Functional Architecture of Protein Structures. Curr. Res. Struct. Biol., 3, 257-267.
+
+3. Soundhararajan Gopi, Animesh Singh, Swaathiratna Suresh, Suvadip Paul, Sayan Ranu & Athi N. Naganathan (2017). Toward a Quantitative Description of Microscopic Pathway Heterogeneity in Protein Folding. Phys. Chem. Chem. Phys., 19, 20891 - 20903.
+
+4. Nandakumar Rajasekaran, Swaathiratna Suresh, Soundhararajan Gopi, Karthik Raman & Athi N. Naganathan (2017). A General Mechanism for the Propagation of Mutational Effects in Proteins. Biochemistry, 56, 294–305.
+
+5. Athi N. Naganathan (2012). Predictions from an Ising-Like Statistical Mechanical Model on the Dynamic and Thermodynamic Effects of Protein Surface Electrostatics. J. Chem. Theory Comput., 8, 4646-4656.
