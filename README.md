@@ -103,7 +103,7 @@ IS = 0.15;
 ```
 The parameter `is_long_protein` determines whether `FesCalc_Block()` (for short proteins, such as Villin) or `FesCalc_Block_gen()` (for longer proteins, such as Pertactin in Example 2) is called for determining the free energy profile. If `is_long_protein` is set to 1, definition of additional parameters `disr` and `ppos` is required, as shown in the next example.
 
->  **NOTE :** It is empirically observed that for proteins longer than ~150 residues, setting `is_long_protein` to 1 leads to significant performance boost. Exact performance depends on the value of other input parameters as well.
+>  **NOTE :** It is empirically observed that for proteins longer than ~200 residues, setting `is_long_protein` to 1 leads to significant performance boost. Exact performance depends on the value of other input parameters as well.
 
 3. Then, execute `main_WSME.m`. When prompted, type `y` at the command line and hit `Enter`.
 
