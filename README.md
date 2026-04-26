@@ -1,4 +1,4 @@
-# Hashi : Bridging Binary Microstate Encodings and Protein 3D Structural Ensembles
+# Hashi : Bridging Statistical Model Derived 1D Microstate Encodings and Protein 3D Structural Ensembles
 
 ## About
 
