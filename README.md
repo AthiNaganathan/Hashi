@@ -2,7 +2,7 @@
 
 ## About
 
-Hashi is a pipeline to rapidly and efficiently generate realistic structural ensembles from the outputs of the structure-based Wako-Saitô-Muñoz Eaton (WSME) statistical mechanical model of protein folding. This approach relies on integrating the block WSME model outputs – strings of zeros and ones describing the conformational status of every residue over thousands or millions of microstates each assigned a statistical weight derived from physically grounded energy-entropy terms, and free energy profiles - with the RANCH module of the EOM (ensemble optimization method) from the ATSAS software suite, providing three-dimensional views of the structural ensembles within the model framework.
+_Hashi_ is a pipeline to rapidly and efficiently generate realistic structural ensembles from the outputs of the structure-based Wako-Saitô-Muñoz Eaton (WSME) statistical mechanical model of protein folding. This approach relies on integrating the block WSME model outputs – strings of zeros and ones describing the conformational status of every residue over thousands or millions of microstates each assigned a statistical weight derived from physically grounded energy-entropy terms, and free energy profiles - with the RANCH module of the EOM (ensemble optimization method) from the ATSAS software suite, providing three-dimensional views of the structural ensembles within the model framework.
 
 In this README, we cover the installation and usage requirements for Hashi. For complete information on background, applicability and results, refer _____.
 
