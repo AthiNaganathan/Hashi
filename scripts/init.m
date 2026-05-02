@@ -9,8 +9,9 @@ thisDir  = fileparts(thisFile);
 % Due to difference in launching of terminal, it is required to manually
 % set the ATSAS environment variable on Mac.
 if ismac
-    error("EnsembleWSME : Running on MacOS. Delete line 12 and replace line 13 in init.m with setenv('ATSAS' , '/path/to/atsas')")
-    % setenv('ATSAS' , '/path/to/atsas')
+    error("EnsembleWSME : Running on MacOS. In init.m, delete line 12 and update environment variables ATSAS and PATH in lines 13 and 14")
+    % setenv('ATSAS' , '/path/to/ATSAS-4.1.0-1')
+    % setenv('PATH', [getenv('PATH') ':/path/to/ATSAS-4.1.0-1/bin']);
 end
 
 if ~isfile(fullfile(pwd, "main_RANCH.m")) || ~isfile(fullfile(pwd, "main_WSME.m"))
