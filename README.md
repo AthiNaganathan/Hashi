@@ -22,7 +22,9 @@ Following version of softwares are required -
 
 > **WARNING -** There are some known inconsistencies of this pipeline with more recent version of ATSAS. The user is recommended to install specifically the version mentioned above.
 
-### OS-specific dependencies
+### Note for MacOS users -
+
+Explicit initializing of environment variables is required in MacOS prior to calling terminal from MATLAB. If running Hashi on MacOS, in `scripts\init.m`, delete line 12 and update environment variables ATSAS and PATH in lines 13 and 14 (commented guide available in the code, an error is thrown up if this is not set up properly).
 
 ## Usage
 
@@ -30,7 +32,7 @@ Following version of softwares are required -
 
 The overall workflow is split into two steps - (1) Running bWSME calculations to generate 1D free energy profiles and ensembles, and (2) passing this information to RANCH to generate 3D structural ensembles.
 
-> On cloning the repo, with `\scripts\` as the working directory, run `\scripts\init.m` to generate the empty directories `\data\` and `\results\` which are required for successful execution of the code.
+> On cloning the repo, with `\scripts\` as the working directory, run `init.m` to generate the empty directories `\data\` and `\results\` which are required for successful execution of the code.
 
 > All scripts are to be run with `\scripts\` being the working directory. All the scripts that are intended to be directly executed by the user are present in this directory exclusively.
 
