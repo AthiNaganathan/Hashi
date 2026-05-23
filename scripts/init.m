@@ -7,11 +7,17 @@ thisFile = mfilename('fullpath');
 thisDir  = fileparts(thisFile);
 
 % Due to difference in launching of terminal, it is required to manually
-% set the ATSAS environment variable on Mac.
+% set different environment variables on Mac/Linux
 if ismac
-    error("EnsembleWSME : Running on MacOS. In init.m, delete line 12 and update environment variables ATSAS and PATH in lines 13 and 14")
+    error("Hashi : Running on MacOS. In init.m, delete line 12 and update environment variables ATSAS and PATH in lines 13 and 14")
     % setenv('ATSAS' , '/path/to/ATSAS-4.1.0-1')
     % setenv('PATH', [getenv('PATH') ':/path/to/ATSAS-4.1.0-1/bin']);
+elseif isunix
+    error("Hashi : Running on Linux. In init.m, delete line 16 and update environment variables ATSAS, ATSAS_LICENSE, PATH and LD_LIBRARY_PATH in lines 17 to 20")
+    % setenv('ATSAS', '/path/to/ATSAS/ATSAS-4.1.0-1');
+    % setenv('ATSAS_LICENSE', '/path/to/license/atsas.lic');
+    % setenv('PATH', [getenv('PATH') ':/path/to/ATSAS/ATSAS-4.1.0-1/bin']);
+    % setenv('LD_LIBRARY_PATH', '');
 end
 
 if ~isfile(fullfile(pwd, "main_RANCH.m")) || ~isfile(fullfile(pwd, "main_WSME.m"))
