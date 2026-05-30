@@ -22,9 +22,26 @@ Following version of softwares are required -
 
 > **WARNING -** There are some known inconsistencies of this pipeline with more recent version of ATSAS. The user is recommended to install specifically the version mentioned above.
 
-### Note for MacOS users -
+#### Note for Linux/MacOS users -
 
-Explicit initializing of environment variables is required in MacOS prior to calling terminal from MATLAB. If running Hashi on MacOS, in `scripts\init.m`, delete line 12 and update environment variables ATSAS and PATH in lines 13 and 14 (commented guide available in the code, an error is thrown up if this is not set up properly).
+Explicit initializing of environment variables is required in Linux/MacOS prior to calling terminal from MATLAB. 
+
+If running Hashi on MacOS, in `scripts\init.m`, delete line 12 and update environment variables ATSAS and PATH in lines 13 and 14 (commented guide available in the code, an error is thrown up if this is not set up properly).
+
+If running Hashi on Linux, in `scripts\init.m`, delete line 16 and update environment variables ATSAS, ATSAS_LICENSE, PATH and LD_LIBRARY_PATH in lines 17-20 (commented guide available in the code, an error is thrown up if this is not set up properly).
+
+#### Note for generating STRIDE output -
+
+The bWSME model requires a STRIDE output for calculating block assignments. As mentioned in the subsequent section, this output can be generated from https://webclu.bio.wzw.tum.de/cgi-bin/stride/stridecgi.py. However, should the server not be available, Linux/MacOS users (or Windows users with WSL) can generate the same by downloading and running STRIDE locally from https://github.com/MDAnalysis/stride. While it is advisable to refer to the official documentation for installation specifications, a brief summary of the same would look as -
+
+```
+git clone https://github.com/MDAnalysis/stride.git
+cd stride/src
+make
+./stride your_protein.pdb
+```
+
+And saving the output to a text file as `struct.txt`.
 
 ## Usage
 
@@ -39,7 +56,7 @@ The overall workflow is split into two steps - (1) Running bWSME calculations to
 A general run requires three input files. For a protein named `pname`, these are -
 1. `pname.pdb` - PDB structure of the protein
 2. `pname.cif` - CIF structure of the protein. Must have the same chain ID and atoms as the PDB
-3. `struct.txt` - The formatted STRIDE output - the output from feeding the structure into the STRIDE websever (https://webclu.bio.wzw.tum.de/cgi-bin/stride/stridecgi.py) should be saved as a txt file which will be read by the code to generate blocks
+3. `struct.txt` - The formatted STRIDE output - the output from feeding the structure into the STRIDE websever (https://webclu.bio.wzw.tum.de/cgi-bin/stride/stridecgi.py) should be saved as a text file which will be read by the code to generate blocks
 
 With these files in `\data\`, `main_WSME.m` is called. The outputs of `main_WSME.m` is stored in `\data\WSME_outputs\`. Two specific output files, `pname_pepval.mat` and `pname_BlockDet.mat` are automatically copied into `\data\`, as these two files (along with `pname.pdb` and `pname.cif`) are the four input files required for `main_RANCH.m`. The user is recommended to properly read and execute the two examples given in the next section, to understand the flow of the program, before running it on their data.
 
