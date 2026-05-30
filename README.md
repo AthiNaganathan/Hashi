@@ -56,7 +56,7 @@ The overall workflow is split into two steps - (1) Running bWSME calculations to
 A general run requires three input files. For a protein named `pname`, these are -
 1. `pname.pdb` - PDB structure of the protein
 2. `pname.cif` - CIF structure of the protein. Must have the same chain ID and atoms as the PDB
-3. `struct.txt` - The formatted STRIDE output - the output from feeding the structure into the STRIDE websever (https://webclu.bio.wzw.tum.de/cgi-bin/stride/stridecgi.py) should be saved as a text file which will be read by the code to generate blocks
+3. `struct.txt` - The formatted STRIDE output (refer note in previous section) should be saved as a text file which will be read by the code to generate blocks
 
 With these files in `\data\`, `main_WSME.m` is called. The outputs of `main_WSME.m` is stored in `\data\WSME_outputs\`. Two specific output files, `pname_pepval.mat` and `pname_BlockDet.mat` are automatically copied into `\data\`, as these two files (along with `pname.pdb` and `pname.cif`) are the four input files required for `main_RANCH.m`. The user is recommended to properly read and execute the two examples given in the next section, to understand the flow of the program, before running it on their data.
 
