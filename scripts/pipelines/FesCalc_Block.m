@@ -22,19 +22,19 @@ function FesCalc_Block(pname, struct_file, ene, DS, DCp, T, IS)
     aa=pdb(1,:);
 
     opPath = fullfile(pwd, '..', 'data', 'WSME_outputs', ['contactmapmatElecB',aa,'.dat']);
-    eval(['load ',opPath]);
+    load(opPath)
     eval(['cmapmask=contactmapmatElecB',aa,';']);
 
     opPath = fullfile(pwd, '..', 'data', 'WSME_outputs', ['contdistElecB',aa,'.dat']);
-    eval(['load ',opPath]);
+    load(opPath)
     eval(['contdist=contdistElecB',aa,';']);
 
     opPath = fullfile(pwd, '..', 'data', 'WSME_outputs', ['BlockSize',aa,'.dat']);
-    eval(['load ',opPath]);
+    load(opPath)
     eval(['bs=BlockSize',aa,';']);
 
     opPath = fullfile(pwd, '..', 'data', 'WSME_outputs', [aa '_BlockDet.dat']);
-    eval(['load ',opPath]);
+    load(opPath)
     eval(['BlockDet=',aa,'_BlockDet;']);
 
     nres=length(cmapmask);
