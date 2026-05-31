@@ -4,7 +4,7 @@
 
 _Hashi_ is a pipeline to rapidly and efficiently generate realistic structural ensembles from the outputs of the structure-based Wako-Saitô-Muñoz Eaton (WSME) statistical mechanical model of protein folding. This approach relies on integrating the block WSME model outputs – strings of zeros and ones describing the conformational status of every residue over thousands or millions of microstates each assigned a statistical weight derived from physically grounded energy-entropy terms, and free energy profiles - with the RANCH module of the EOM (ensemble optimization method) from the ATSAS software suite, providing three-dimensional views of the structural ensembles within the model framework.
 
-In this README, we cover the installation and usage requirements for Hashi. For complete information on background, applicability and results, refer _____.
+In this README, we cover the installation and usage requirements for _Hashi_, with specific examples.
 
 ## Installation Instructions
 
@@ -26,9 +26,9 @@ Following version of softwares are required -
 
 Explicit initializing of environment variables is required in Linux/MacOS prior to calling terminal from MATLAB. 
 
-If running Hashi on MacOS, in `scripts\init.m`, delete line 12 and update environment variables ATSAS and PATH in lines 13 and 14 (commented guide available in the code, an error is thrown up if this is not set up properly).
+If running _Hashi_ on MacOS, in `scripts\init.m`, delete line 12 and update environment variables ATSAS and PATH in lines 13 and 14 (commented guide available in the code, an error is thrown up if this is not set up properly).
 
-If running Hashi on Linux, in `scripts\init.m`, delete line 16 and update environment variables ATSAS, ATSAS_LICENSE, PATH and LD_LIBRARY_PATH in lines 17-20 (commented guide available in the code, an error is thrown up if this is not set up properly).
+If running _Hashi_ on Linux, in `scripts\init.m`, delete line 16 and update environment variables ATSAS, ATSAS_LICENSE, PATH and LD_LIBRARY_PATH in lines 17-20 (commented guide available in the code, an error is thrown up if this is not set up properly).
 
 #### Note for generating STRIDE output -
 
@@ -41,7 +41,7 @@ make
 ./stride your_protein.pdb
 ```
 
-And saving the output to a text file as `struct.txt`.
+And save the output to a text file as `struct.txt`.
 
 ## Usage
 
@@ -251,7 +251,7 @@ The user is of course encouraged to utilize their own visualization pipelines. T
 
 ## References
 
-If using Hashi, please cite the following two articles:
+If using _Hashi_, please cite the following two articles:
 
 1. Soundhararajan Gopi, Akashnathan Aranganathan & Athi N. Naganathan (2019). Thermodynamics and Folding Landscapes of Large Proteins from a Statistical Mechanical Model. Curr. Res. Struct. Biol., 1, 6-12.
 
