@@ -59,6 +59,8 @@ A general run requires three input files. For a protein named `pname`, these are
 3. `struct.txt` - The formatted STRIDE output (refer note in previous section) should be saved as a text file which will be read by the code to generate blocks
 
 > **NOTE -** The user must ensure good quality input .pdb and .cif files for the program, with no missing atoms and consistent residue indices. Incomplete or corrupted input files have been known to loop the RANCH algorithm indefinitely, or give rise to other errors.
+>
+> Further, presence of HETATOM records in the input files also causes errors in the algorithm, so the user is advices to remove these atoms beforehand.
 
 With these files in `\data\`, `main_WSME.m` is called. The outputs of `main_WSME.m` is stored in `\data\WSME_outputs\`. Two specific output files, `pname_pepval.mat` and `pname_BlockDet.mat` are automatically copied into `\data\`, as these two files (along with `pname.pdb` and `pname.cif`) are the four input files required for `main_RANCH.m`. The user is recommended to properly read and execute the two examples given in the next section, to understand the flow of the program, before running it on their data.
 
