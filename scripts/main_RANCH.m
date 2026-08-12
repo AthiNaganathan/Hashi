@@ -10,7 +10,7 @@ init
 
 %%% Setup Input Parameters
 
-timeoutSec = 120; % How long to run RANCH for (longer explanation towards end of code, and in documentation)
+timeoutSec = 300; % How long to run RANCH for (longer explanation towards end of code, and in documentation)
 
 % % Example 1 : Villin
 % pname = 'Villin'; % Protein name

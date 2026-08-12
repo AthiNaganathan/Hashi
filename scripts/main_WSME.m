@@ -1,6 +1,10 @@
 %%% Run the bWSME model
 %   Run the bWSME model to obtain 1-D microstate probabilities
 
+if ~exist("init.m", "file")
+    error("init function not found. Set pwd to /scripts/")
+end
+
 init
 
 % Set protein name

@@ -58,6 +58,8 @@ A general run requires three input files. For a protein named `pname`, these are
 2. `pname.cif` - CIF structure of the protein. Must have the same chain ID and atoms as the PDB
 3. `struct.txt` - The formatted STRIDE output (refer note in previous section) should be saved as a text file which will be read by the code to generate blocks
 
+> **NOTE -** The user must ensure good quality input .pdb and .cif files for the program, with no missing atoms and consistent residue indices. Incomplete or corrupted input files have been known to loop the RANCH algorithm indefinitely, or give rise to other errors.
+
 With these files in `\data\`, `main_WSME.m` is called. The outputs of `main_WSME.m` is stored in `\data\WSME_outputs\`. Two specific output files, `pname_pepval.mat` and `pname_BlockDet.mat` are automatically copied into `\data\`, as these two files (along with `pname.pdb` and `pname.cif`) are the four input files required for `main_RANCH.m`. The user is recommended to properly read and execute the two examples given in the next section, to understand the flow of the program, before running it on their data.
 
 > **NOTE :** If you already have `pname_pepval.mat` and `pname_BlockDet.mat` in `\data\` (say, from a previous run), you can run `main_RANCH.m` directly.
@@ -102,8 +104,8 @@ Copy the three files (`Villin.pdb`, `Villin.cif` and `struct.txt`) from `\exampl
 ### 1.2 Running main_WSME.m -
 
 Open `\scripts\main_WSME.m` and edit the following parameters -
-1. Set `pname` to the protein name (line 9), `BlockSize` to the size of blocks to be considered in the bWSME model (line 10), and `is_long_protein` to zero (line 11). 
-2. Set the input parameters for `cmapCalcElecBlock` and `FesCalc_Block` (their documentation can be found in the function source codes in `\scripts\pipelines`) in the parameters between lines 12 and 19. 
+1. Set `pname` to the protein name (line 13), `BlockSize` to the size of blocks to be considered in the bWSME model (line 14), and `is_long_protein` to zero (line 15). 
+2. Set the input parameters for `cmapCalcElecBlock` and `FesCalc_Block` (their documentation can be found in the function source codes in `\scripts\pipelines`) in the parameters between lines 16 and 23. 
 
 For the ease of the user, these values default to the current Villin example, given as -
 ```matlab
@@ -136,10 +138,10 @@ Calling function `disp_blocks(pname)` from the MATLAB command line displays the 
 ### 1.3 Running main_RANCH.m -
 
 Open `\scripts\main_RANCH.m` and edit the following parameters -
-1. Set `pname` to the protein name (line 10).
-2. Set `macrostate_pools` to the pools you wish to visualize (line 11).
-3. Set `no_of_microstates` to the number of (statistically most significant) microstates to be considered per pool (line 12).
-4. Set `no_of_conformations` to the number of conformations to be generated per microstate (line 13).
+1. Set `pname` to the protein name (line 16).
+2. Set `macrostate_pools` to the pools you wish to visualize (line 17).
+3. Set `no_of_microstates` to the number of (statistically most significant) microstates to be considered per pool (line 18).
+4. Set `no_of_conformations` to the number of conformations to be generated per microstate (line 19).
 
 For the ease of the user, these values default to the current Villin example, given as -
 ```matlab
@@ -184,7 +186,7 @@ Copy the three files (`Pertactin.pdb`, `Pertactin.cif`, and `struct.txt`) from `
 Open `\scripts\main_WSME.m` and edit the following parameters -
 1. Set protein name and edit input parameters as described in the previous example. For a long proteins (empirically, >150 residues) such as Pertactin, it is recommended to set `is_long_protein` to 1.
 
-For the ease of the user, the values for this run are available commented from the lines **(22-33)**. You can comment the values of the previous example (lines **8-19**), and uncomment the lines for this example. Once uncommented, they appear as follows -
+For the ease of the user, the values for this run are available commented from the lines **(25-36)**. You can comment the values of the previous example (lines **12-23**), and uncomment the lines for this example. Once uncommented, they appear as follows -
 ```matlab
 % Pertactin
 pname = 'Pertactin';
@@ -208,7 +210,7 @@ You will now see output files of the same in `\data\WSME_outputs\`, alongside tw
 
 Open `\scripts\main_RANCH.m` and edit the input parameters. The meanings of the various input parameters remain identical to the previous example.
 
-For the ease of the user, the values for this run are available commented from the lines **(15-19)**. You can comment the values of the previous example (lines **9-13**), and uncomment the lines for this example. Once uncommented, they appear as follows -
+For the ease of the user, the values for this run are available commented from the lines **(21-25)**. You can comment the values of the previous example (lines **15-19**), and uncomment the lines for this example. Once uncommented, they appear as follows -
 ```matlab
 % Example 2 : Pertactin
 pname = 'Pertactin'; % Protein name
@@ -217,7 +219,9 @@ no_of_microstates = 5; % No. of microstates considered per pool of macrostates
 no_of_conformations = 5; % No. of conformations to be generated per microstate
 ```
 
-> **WARNING -** It is a known issue that increasing `no_of_conformations` to values beyond ~5 (sometimes) causes the program to halt indefinitely, especially for large proteins as in this example. This is because RANCH does not timeout (it searches till it finds a solution) and for unlucky initial conditions, the algorithm gets stuck in a loop. The fix for this is currently not available, and the user is recommended to be conservative while assigning the input parameters, and to retry execution, should the program get stuck.
+> **WARNING -** It is a known issue for this protein that when RANCH is asked to model very short double Glycine-containing sequences between two larger structured blocks (in the DSAw/L approximation), the RANCH program gets stuck for arbitrarily long times. This behaviour so far has only occured in this protein (for certain microstates only in pools like 11-15 or 86-95, not covered in this example) out of the 30+ proteins tested. Resolving this would require more detailed examination of the implementation of the RANCH algorithm. 
+>
+>It is possible, though unlikely, that similar behaviour could be observed on other proteins where specific sequences in a specific ordered/disordered schemes cause RANCH to get stuck indefinitely. Currently, the variable `timeoutSec` in `line 13` (set by default to 5 minutes, since RANCH runs typically take <2 minutes) controls how long RANCH is allowed to run for on any particular microstate before forcibly being stopped. The microstates where the conformations did not converge are stored in `results/skipped_mis.mat` (in standard format, except the 8th column of each entry points to the pool from where that microstate was taken), and a summary of the skipped microstates are displayed in the MATLAB console after the execution of the run. The user may choose to increase `timeoutSec` if they feel their device might be slower, but in our testing, if RANCH did not converge in ~2 min, it did not converge even after multiple hours.The `plot_fails` function is useful in visualizing the microsates that were skipped due to timeout.
 
 Once pools have been assigned, calling function `disp_blocks(pname, macrostate_pools)` displayes the assigned pools, for verification. For this example, the output is as follows -
 
