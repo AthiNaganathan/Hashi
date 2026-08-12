@@ -1,4 +1,6 @@
-function run_ranch(pname, reps)     
+function run_ranch(pname, reps, no_of_microstates, timeoutSec)
+    skip_mis = [];
+    
     % Calls and runs RANCH from terminal
     foldername = fullfile("..", "results", "microstates");
     folders = dir(foldername);
@@ -27,7 +29,7 @@ function run_ranch(pname, reps)
                 % Build command
                 command = 'ranch --repetitions '+reps+' --model-format=cif --prefix '+fullfile(ranch_path, sprintf('%d_%d_rank%d_', mis(1), mis(7), mis(8)))+' '+fullfile(folder_path, 'assignment.txt')+' '+fullfile(folder_path, 'sequence.seq')+' '+fullfile(folder_path, 'dom1.pdb');
                 % Execute RANCH from terminal
-                [status, cmdout] = system(command);
+                [status, cmdout] = run_cmd_with_timeout(command, timeoutSec);
             else
                 % If the microstate is fully folded, RANCH cannot process
                 % it (throws an error). Therefore, just copy the input .cif
@@ -35,21 +37,27 @@ function run_ranch(pname, reps)
                 copyfile(fullfile("..", "data", pname+".cif"), ranch_path) 
                 [status, cmdout] = movefile(fullfile(ranch_path, pname+".cif"), fullfile(ranch_path, sprintf('%d_%d_rank1.cif', mis(1) ,mis(7))));
                 if status == 1
-                    status = 0;
+                    status = 0; % movefile returns 1 on success whereas RANCH returns 0 xD
                 end
             end
         else  % DSA or DSAw/L; discrimination between these two is built into assignment.txt  
             command = 'ranch --repetitions '+reps+' --model-format=cif --prefix '+fullfile(ranch_path, sprintf('%d_%d_rank%d_', mis(1), mis(7), mis(8)))+' '+fullfile(folder_path, 'assignment.txt')+' '+fullfile(folder_path, 'sequence.seq')+' '+fullfile(folder_path, 'dom1.pdb')+' '+fullfile(folder_path, 'dom2.pdb');
-            [status, cmdout] = system(command);
+            [status, cmdout] = run_cmd_with_timeout(command, timeoutSec);
         end
     
         % Check for successful execution of RANCH
         if status == 0
             disp(sprintf('%d of %d', i-2, n-2) + " done with status " + sprintf('%d', status))
+        elseif status == 124
+            warning('Microstate %d was timed out after %d seconds', i-2, timeoutSec)
+            pool_index = ceil(i/no_of_microstates);
+            mis(end) = pool_index;
+            skip_mis = [skip_mis; mis];
         else
             error("EnsembleWSME - Ranch exited with non-zero status %d \n %s", status, cmdout)
         end
     end
     
+    save(fullfile("..", "results", "skipped_mis.mat"), "skip_mis")
     disp("run_ranch done")
 end

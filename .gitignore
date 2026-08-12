@@ -5,6 +5,11 @@
 *.log
 *.pse
 
+# Testing scripts
+main_timings.m
+align_structures.py
+
 # Data and results
 data/
 results/
+scripts/runtime_vars
