@@ -12,17 +12,17 @@ init
 
 timeoutSec = 300; % How long to run RANCH for (longer explanation towards end of code, and in documentation)
 
-% % Example 1 : Villin
-% pname = 'Villin'; % Protein name
-% macrostate_pools = [25 34]; % Split 1D landscape into pools wherein to visualize ensemble
-% no_of_microstates = 20; % No. of microstates considered per pool of macrostates
-% no_of_conformations = 5; % No. of conformations to be generated per microstate
-
-% Example 2 : Pertactin
-pname = 'Pertactin'; % Protein name
-macrostate_pools = [68 76; 107 111; 128 137]; % Split 1D landscape into pools wherein to visualize ensemble
-no_of_microstates = 5; % No. of microstates considered per pool of macrostates
+% Example 1 : Villin
+pname = 'Villin'; % Protein name
+macrostate_pools = [25 34]; % Split 1D landscape into pools wherein to visualize ensemble
+no_of_microstates = 20; % No. of microstates considered per pool of macrostates
 no_of_conformations = 5; % No. of conformations to be generated per microstate
+
+% % Example 2 : Pertactin
+% pname = 'Pertactin'; % Protein name
+% macrostate_pools = [68 76; 107 111; 128 137]; % Split 1D landscape into pools wherein to visualize ensemble
+% no_of_microstates = 5; % No. of microstates considered per pool of macrostates
+% no_of_conformations = 5; % No. of conformations to be generated per microstate
 
 
 % Run disp_blocks(pname, macrostate_pools) in console to visualize assigned splits
@@ -57,22 +57,9 @@ if size(skip_mis, 1)
 
     [seq_len, ~, ~] = gen_seq(pname + ".pdb");
     
-    % Plot the microstates that fail. Refer documentation for complete
-    % details; there appears to be an edge case where if RANCH is asked to
-    % model a very small disordered region with a particular sequence
-    % between two structured regions in the DSAw/L approximation, the
-    % algorithm gets stuck in a loop and does not quit out even after
-    % arbitrarily long times. 
-    % 
-    % To avoid this, the program automatically kills the RANCH process 
+    % Plot the microstates that fail. The program automatically kills the RANCH process 
     % after timeoutSec number of seconds, skips that microstate, stores it,
-    % and displays it after the run is complete. Resolving this behaviour 
-    % completely would require deeper understanding of the implementation 
-    % of the RANCH algorithms.
-    %
-    % Thankfully, this behaviour is extremely anamalous; in our testing,
-    % only one protein out of >30 tested showed the algorithm getting stuck
-    % in such loops, and that too for very specific microstates.
+    % and displays it after the run is complete.
 
     plot_fails(skip_mis, seq_len)
 else

@@ -3,7 +3,7 @@ function plot_fails(skip_mis, seq_len)
 
     vis = zeros(size(skip_mis, 1), seq_len);
     for i = 1:size(skip_mis, 1)
-        row = zeros(1, 539);
+        row = zeros(1, seq_len);
         cur = skip_mis(i, 3:6);
     
         row(cur(1):cur(1)+cur(2)-1) = repelem(1, cur(2));
