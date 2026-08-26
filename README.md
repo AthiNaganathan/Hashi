@@ -81,7 +81,7 @@ Alongside the structures, `\results\pools\` also contains the information of the
 >| Column number | Value interpretation |
 >| :--- | :--- |
 >| **1** | Number of structured blocks in the microstate |
->| **2** | The overall probability of this microstate against all microstates in the scope of the bWSME model |
+>| **2** | The statistical weight of that microstate |
 >| **3** | The starting block index of the first structured region |
 >| **4** | The ending block index of the first structured region |
 >| **5** | The starting block index for the second structured region (set to 0 for SSA) |
